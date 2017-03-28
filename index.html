@@ -1,0 +1,247 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<title>Waterfill.me</title>
+<meta charset="utf-8">
+<meta property="og:image" content="https://waterfill.me/fb.jpg" />
+<meta property="og:title" content="Map of California Driking Fountains"/>
+<meta property="og:site_name" content="Waterfill.me"/>
+<meta property="og:description" content="An interactive map showing drinking water fountains in California from the OpenStreetMap database."/>
+<style>#watermap { height: 80%; width: 90%; align: center;  margin: auto; padding: 10px } </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+<link rel="stylesheet" href="js/l-fullscreen/dist/leaflet.fullscreen.css" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="js/l-locate/L.Control.Locate.min.css">
+
+
+<script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+
+<!-- <script src="/js/Leaflet.AccuratePosition.js" charset="utf-8"></script> -->
+
+<script src="js/l-fullscreen/dist/Leaflet.fullscreen.min.js"></script>
+<script src="js/l-locate/L.Control.Locate.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- <script src="js/leaflet.zoomdisplay.js"></script> 
+<link rel="stylesheet" href="js/leaflet.zoomdisplay.css" />
+-->
+
+</head>
+<body>
+<h3>Drinking Fountains in California</h3>
+<div id="watermap" class="roundgrayborder"></div>
+<div class="width80 centered">FAQ below: click a question to expand the answer.</div>
+<div class="panel-group width80" id="accordion">
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+        What is this?</a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+      <div class="panel-body">This is a map of all the places in California that someone has tagged in the OpenStreetMap database as being a location of a source of drinking water.</div>
+    </div>
+  </div>
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1a">
+        What do the icons mean?</a>
+      </h4>
+    </div>
+    <div id="collapse1a" class="panel-collapse collapse">
+      <div class="panel-body"> There are four control icons at the top left. Two zoom in and out. The square is fullscreen mode. The button with the "map pin" icon will ask your browser for your location and then zoom there. The water icons on the map show where there are drinking water sources (usually drinking fountains) in the OpenStreetMap database. </div>
+    </div>
+  </div>
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+        Is there actually going to be a drinking fountain at every water icon?</a>
+      </h4>
+    </div>
+    <div id="collapse2" class="panel-collapse collapse">
+      <div class="panel-body">Probably; use this as a guide but don't rely on it for critical siutations; there's no warranties to its accuracy. OpenStreetMap is sort of like the Wikipedia of geographical information. Since it is edited by individual users, there may be errors. Like with any geographical database, information may go stale, like if a drinking fountain goes out of service. The water sources may also have access issues that are not labeled, like being in a building or behind a gate. </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+        What if I know of a missing or inaccurate drinking fountain?</a>
+      </h4>
+    </div>
+    <div id="collapse3" class="panel-collapse collapse">
+      <div class="panel-body">There are three steps to add a fountain: (1) Take a geo-located picture of the water fountain; (2) create a OSM account, and (3) upload it to the OSM database with the JOSM application. Taking those one at a time: 
+<ol><li>Take a geo-located picture of the drinking fountain. This is a photo that has GPS position data in it. Most mobile phones can do this, although you may have to change the settings in the camera to enable it. You also want to make sure that you have a good GPS fix on your location. You can do this in Google Maps or another mapping location that shows the error in your GPS fix, uually by showing a larger circle that gets smaller as the phone locates you. Some camera applications, such as <a href="https://play.google.com/store/apps/details?id=net.sourceforge.opencamera&hl=en">Open Camera</a> for Android devices, will show you whether you have a good GPS fix in the application itself.</li><li>Create an OSM Account. Follow <a href="https://www.openstreetmap.org/user/new">this link</a>, and it's pretty much like creating an account anywhere else.</li><li>Add the location to JOSM. This is a little more complicated, but not <i>that</i> complicated. Download and open the JOSM applicaton, <a href="https://josm.openstreetmap.de/wiki/Download">instructions here</a>. Then, in JOSM: (a) Open the picture, or drag-and-drop it onto the application, and you will see a little camera icon on a blank field; (b) in the upper-left, click the "download" button and then confirm "download", and you download the map information in the surrounding area; (c) confirm that the location of the camera/fountain location is correct and that no drinking fountain icon shows up there; (d) hit the "a" key to switch to "add" mode; (e) double-click on the camera icon location, and you will see a "node" show up to the right; (f) to the right under "tags/memberships" click "Add"; (g) under "Please select a key" enter "amenity" and under value enter "drinking_water"; (h) optionally also add key "description" with a value of a description of the water fountain or its location;(i) click the "upload" button in the top left, which will give you an upload dialog, make sure there are no errors and it shows only one "node" to upload, then click "Upload Changes". Voila! You should now be able to see it as a water source on <a href="https://www.openstreetmap.org">openstreetmap.org</a>, although you may have to flush your browser cache. Showing up here on waterfill.me may take a week since its database is refreshed less often. Here is a one-minute video showing the steps above: <iframe width="1000" height="563" style="display:block; margin: 10 auto" src="https://www.youtube.com/embed/edSRCYFLCrc" frameborder="0" allowfullscreen></iframe>
+</li>
+</ol>  
+<p>If you want to learn more you might check out the OpenStreetMap wiki, especially the pages about <a href="http://wiki.openstreetmap.org/wiki/JOSM/Photomapping">JOSM Photomapping</a>, <a href="http://wiki.openstreetmap.org/wiki/Photo_mapping">photomapping generally</a>, and the <a href="http://wiki.openstreetmap.org/wiki/Tag:amenity%3Ddrinking_water">amenity=drinking_water tag</a>. 
+
+</div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+        Who made this?</a>
+      </h4>
+    </div>
+    <div id="collapse4" class="panel-collapse collapse">
+      <div class="panel-body">My name is Joe Morris, and I'm an <a href="http://josephmorrislaw.com">attorney</a>, bicyclist, and <a href="https://xenotropic.github.io/">programer</a> in Oakland, California. The data is all open-source OpenStreetMaps data, and the software is also open-source (see "How Did You Make This?" below), so I don't own and haven't verified any of the data. I made this site because I wanted to be able to easily see where I could get water when biking, although I could imagine it would be useful for anyone who is thirsty! If you want to contact me about the site or other aspects of it, send me an email at joe at morris dot cloud.</div>
+    </div>
+  </div>
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+        How did you make this?</a>
+      </h4>
+    </div>
+    <div id="collapse5" class="panel-collapse collapse">
+      <div class="panel-body">I built an open street map tile server on Amazon EC2 following <a href="https://switch2osm.org/serving-tiles/manually-building-a-tile-server-14-04/">these instructions</a>, and then made <a href="https://github.com/xenotropic/OSMBright-drinkingwater">some changes</a> to the map stylesheet so that it shows "amenity=drinking fountain" features at low zoom levels. It's not rocket science, but it look a little while. You can see all the same drinking fountains on <a href="https://openstreetmap.org">the main OpenStreetMap map</a>, but there the drinking fountains are only available when you are very zoomed-in, plus there is a lot of other stuff on the map that makes it hard to see where the drinking water is. </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
+        Why is it only for California?</a>
+      </h4>
+    </div>
+    <div id="collapse6" class="panel-collapse collapse">
+      <div class="panel-body">Having a "tile server", which is a web server that runs a special program to create and display maps, takes up a sizable amount of data and computing power. I'd like to make this display available for a larger geographical area, but doing so would require a more sizable server than I can afford for what is, at the moment, just a hobby. If you have information on grants or other funding sources that might provide for developement of this map, either in features or geographic scope, please be in touch (see "Who made this?" above).  </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse6a">
+        How are you going to make money off of it?</a>
+      </h4>
+    </div>
+    <div id="collapse6a" class="panel-collapse collapse">
+      <div class="panel-body">I'm not. I mean, not in the sense of selling ads or subscriptions or something. All the data is open source, so I couldn't really. Right now it's just a hobby, something I did to learn more about mapping and hopefully make something useful. If there is grant or government money or something to develop it further, I think it would be super-cool to do this for the whole planet. That's what I wanted to do to start with, but the server requirements mean it would be a fairly expensive hobby. I'd also like to integrate it better with OSM for additions/edits, and it seems like it would also be useful to have bathrooms too, although that might be a separate website.  </div>
+    </div>
+  </div>
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse6c">
+        Is it just me or is it a little bit slow sometimes?</a>
+      </h4>
+    </div>
+    <div id="collapse6c" class="panel-collapse collapse">
+      <div class="panel-body">All the tiles (images that make up the map) are pre-generated when you are zoomed out. As you zoom in, the server has to generate the images if no one has requested them before, so it may take a few seconds for the map detail to "resolve" as you zoom in.</div>
+    </div>
+  </div>
+
+
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse6b">
+        Are you going to add to it?</a>
+      </h4>
+    </div>
+    <div id="collapse6b" class="panel-collapse collapse">
+      <div class="panel-body">I hope so. My next plan is to make an add-on to collect geo-located pictures of drinking fountains, so that people that don't want to have to deal with uploading with JOSM don't have to. OSM doesn't keep images of locations, but it seems like having pictures of the water sources would help so you know what you're looking for.  </div>
+    </div>
+  </div>
+
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">
+        Can I get updates?</a>
+      </h4>
+    </div>
+    <div id="collapse7" class="panel-collapse collapse">
+      <div class="panel-body"> Yes. The most likely updates will be when I've made the part to collect geolocated drinking fountain images, and then perhaps an expansion of geographic scope. 
+
+<!-- Begin MailChimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+  #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+  /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+     We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup" class="width80">
+<form action="//bikewater.us14.list-manage.com/subscribe/post?u=9151522e9d3dae16f04a9d41f&amp;id=f50ae783d2" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL">Subscribe to the waterfill.me updates mailing list:</label>
+      <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_9151522e9d3dae16f04a9d41f_f50ae783d2" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+  </div>
+    </div>
+  </div>
+
+
+</div>
+</body>
+
+<script type="text/javascript">
+
+window.onError = function (error) {
+  alert (error);
+}
+
+var map;
+var ajaxRequest;
+var plotlist;
+var plotlayers=[];
+
+// set up the map
+map = new L.Map('watermap', {
+fullscreenControl: {
+        pseudoFullscreen: false
+    }
+});
+L.control.locate({locateOptions: 'enableHighAccuracy=true, watch=true', icon:'fa fa-crosshairs'}).addTo(map);
+
+// create the tile layer with correct attribution
+// var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+var osmUrl='https://waterfill.me/osm_tiles/{z}/{x}/{y}.png';
+var osmAttrib='Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
+var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 18, attribution: osmAttrib});
+
+// start the map in the Bay Area
+map.setView(new L.LatLng(37.8, -122.2),11);
+map.addLayer(osm);
+
+
+
+</script>
+
+</html>

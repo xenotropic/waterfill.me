@@ -1,0 +1,15 @@
+
+
+# body { font-family: "PT Sans"; background-image: url("/js/workless/assets/img/backgrounds/bg_debutlight.png") ; }
+
+H3 { text-align: center;   }
+H4 { text-align: center;  font-size: 110% }
+
+
+.width80 { width: 80%; margin: auto; padding: 10px; }
+
+.watermap { height: 80%; width: 80%; align: center;  margin: auto; padding: 10px }
+
+.centered { text-align: center }
+
+.roundgrayborder { border: 2px solid #A8A8A8 ; }
